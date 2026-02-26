@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>晚睡自救药方</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #1a1a2e;
+    --card: #16213e;
+    --card-border: #0f3460;
+    --accent: #e94560;
+    --accent-soft: #ff6b6b;
+    --green: #51cf66;
+    --gold: #ffd43b;
+    --text: #e8e8e8;
+    --text-muted: #a0a0b8;
+    --quote-bg: #0f3460;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 60px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 50%, rgba(233, 69, 96, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(81, 207, 102, 0.05) 0%, transparent 50%);
+    animation: aurora 20s ease-in-out infinite;
+  }
+
+  @keyframes aurora {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(2%, -1%) rotate(1deg); }
+    66% { transform: translate(-1%, 1%) rotate(-1deg); }
+  }
+
+  .hero h1 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    position: relative;
+    background: linear-gradient(135deg, #fff 0%, #ffd43b 50%, #ff6b6b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .subtitle {
+    font-size: 0.95em;
+    color: var(--text-muted);
+    line-height: 2;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .section {
+    margin: 32px 0;
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .section-header {
+    padding: 20px 24px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .section-header h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .section-header .num {
+    color: var(--accent);
+    margin-right: 6px;
+  }
+
+  .section-body {
+    padding: 16px 24px 24px;
+  }
+
+  .mermaid {
+    margin: 16px 0;
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  .golden-quote {
+    background: linear-gradient(135deg, rgba(255, 212, 59, 0.1) 0%, rgba(233, 69, 96, 0.08) 100%);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 12px 12px 0;
+    font-size: 0.95em;
+  }
+
+  .golden-quote strong {
+    color: var(--gold);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .golden-quote .sub {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-top: 6px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.9em;
+  }
+
+  th {
+    background: rgba(255,255,255,0.05);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 500;
+    color: var(--gold);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  td:first-child {
+    font-weight: 500;
+    color: var(--accent-soft);
+    white-space: nowrap;
+  }
+
+  .bedtime-card {
+    background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+    border: 1px solid rgba(81, 207, 102, 0.2);
+    border-radius: 16px;
+    margin: 32px 0;
+    overflow: hidden;
+  }
+
+  .bedtime-card .section-header {
+    border-bottom-color: rgba(81, 207, 102, 0.1);
+  }
+
+  .bedtime-card h2 {
+    color: var(--green);
+  }
+
+  .step {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+
+  .step-content h3 {
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .step-content p {
+    font-size: 0.88em;
+    color: var(--text-muted);
+  }
+
+  .step-tag {
+    display: inline-block;
+    background: rgba(81, 207, 102, 0.15);
+    color: var(--green);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    margin-top: 6px;
+  }
+
+  .finale {
+    text-align: center;
+    padding: 48px 24px;
+    margin: 40px 0 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(233, 69, 96, 0.05) 50%, transparent 100%);
+  }
+
+  .finale p {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.05em;
+    line-height: 2.2;
+    color: var(--text-muted);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .finale .highlight {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .finale .core {
+    font-size: 1.3em;
+    color: var(--gold);
+    font-weight: 700;
+    margin: 24px 0;
+    line-height: 1.8;
+  }
+
+  .finale .date {
+    margin-top: 32px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+    font-family: 'Noto Sans SC', sans-serif;
+    opacity: 0.6;
+  }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--card-border), transparent);
+    margin: 8px 0;
+  }
+
+  .mirror-card {
+    background: rgba(255, 212, 59, 0.04);
+    border: 1px solid rgba(255, 212, 59, 0.15);
+  }
+
+  /* Navigation */
+  .nav-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 1.4em;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-toggle:active { transform: scale(0.92); }
+  .nav-toggle.open { background: #868e96; transform: rotate(45deg); }
+
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .nav-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-drawer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card);
+    border-top: 1px solid var(--card-border);
+    border-radius: 20px 20px 0 0;
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: 70vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0 calc(env(safe-area-inset-bottom, 0px) + 16px);
+  }
+
+  .nav-drawer.show { transform: translateY(0); }
+
+  .nav-drawer .nav-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.95em;
+    color: var(--gold);
+    padding: 0 24px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 8px;
+  }
+
+  .nav-drawer a {
+    display: block;
+    padding: 11px 24px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .nav-drawer a:active {
+    background: rgba(255,255,255,0.06);
+  }
+
+  .nav-drawer a .nav-num {
+    color: var(--accent);
+    font-weight: 600;
+    margin-right: 8px;
+    display: inline-block;
+    min-width: 28px;
+  }
+
+  .nav-drawer a.nav-action {
+    color: var(--green);
+    font-weight: 500;
+  }
+
+  .nav-drawer a.nav-finale {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .nav-drawer .nav-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 8px 24px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  @media (max-width: 480px) {
+    .hero { padding: 48px 20px 32px; }
+    .hero h1 { font-size: 1.6em; }
+    .section-body { padding: 12px 16px 20px; }
+    .section-header { padding: 16px 16px 10px; }
+    .section-header h2 { font-size: 1.05em; }
+    table { font-size: 0.82em; }
+    th, td { padding: 8px 8px; }
+    .nav-toggle { bottom: 20px; right: 20px; }
+  }
+
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 1.4em; }
+    .hero .subtitle { font-size: 0.88em; }
+    .section-header h2 { font-size: 0.95em; }
+    .golden-quote { padding: 12px 14px; font-size: 0.88em; }
+    .nav-drawer a { font-size: 0.85em; padding: 10px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>晚睡自救药方</h1>
+  <p class="subtitle">
+    写给那个从12岁就开始鞭打自己、<br>
+    跑了二十多年都不敢停下来的你。<br><br>
+    你不需要再吓自己了。<br>
+    你已经长大了。你很安全。你可以睡了。
+  </p>
+  <p style="margin-top: 32px; padding: 20px 24px; background: rgba(233, 69, 96, 0.12); border: 1px solid rgba(233, 69, 96, 0.3); border-radius: 12px; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto; position: relative; font-family: 'Noto Serif SC', serif; font-size: 0.95em; color: #ff6b6b; line-height: 2;">
+    <span style="font-size: 1.3em; font-weight: 700; display: block; margin-bottom: 8px; color: #fff;">停止自残。保护你的身体。</span>
+    你的近视已经750度了——这就是你伤害自己的证据。<br>
+    创业是为了比打工时活得<strong style="color: #ffd43b;">更好</strong>，不是更差。<br>
+    你明明可以不吃的苦，就别没苦硬吃了。<br>
+    <strong style="color: #fff;">别背离你出发时的初衷。</strong>
+  </p>
+</div>
+
+<div class="container">
+
+  <!-- 一 -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <h2><span class="num">01</span>你以为的问题 vs 真正的问题</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph LR
+          A["表面问题：我不能早睡早起"] -->|"你以为是"| B["自律不够"]
+          A -->|"实际上是"| C["你的系统没有关机按钮"]
+          C --> D["只有两个模式"]
+          D --> E["全力运转"]
+          D --> F["强行麻痹"]
+      </div>
+    </div>
+  </div>
+
+  <!-- 二 -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <h2><span class="num">02</span>你每天的恶性循环</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["白天：高强度创业"] --> B["身心精疲力尽"]
+          B --> C["晚上：不敢停下来"]
+          C --> D["不敢闭眼——安静了鞭子就来了"]
+          D --> E["用刷手机麻痹自己"]
+          E --> F["凌晨3-5点：崩溃式入睡"]
+          F --> G["第二天：六成功力的大脑"]
+          G --> H["更焦虑、更累"]
+          H --> A
+          style D fill:#ff6b6b,color:#fff
+          style E fill:#ffa94d,color:#fff
+          style F fill:#868e96,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>你不是不能早睡，你是不敢。</strong>
+        <div class="sub">你不敢安静，因为一安静，那个审判你的声音就会回来。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三 -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <h2><span class="num">03</span>那个声音是怎么来的？</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["童年环境"] --> B["父母的爱是有条件的"]
+          B --> C["优秀才值得被爱"]
+          A --> D["让优秀成为一种习惯"]
+          A --> E["妈妈：你好好学学"]
+          C --> G["小女孩的生存策略"]
+          D --> G
+          E --> G
+          G --> H["把外面的鞭子复制进自己脑子里"]
+          H --> I["初中：写纸条恐吓自己"]
+          H --> J["用死亡念头控制情绪"]
+          H --> K["用死亡恐惧驱动一切"]
+          I --> L["这套系统跑了20年"]
+          J --> L
+          K --> L
+          style G fill:#ff6b6b,color:#fff
+          style L fill:#e03131,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>那是一个小女孩在不安全的环境里发明出来保护自己的盔甲。</strong>
+        <div class="sub">它曾经保护了你。但你现在长大了，盔甲太小了，它不再保护你，它在勒死你。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四 -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <h2><span class="num">04</span>你一直在为别人的局限买单</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["你觉得自己不够好"] --> B{"真的是你不够好吗？"}
+          B -->|"父亲说不结婚别回来"| C["他的局限"]
+          B -->|"妈妈说好好学学"| D["她的局限"]
+          B -->|"前男友恐吓威胁"| E["他的问题"]
+          B -->|"老板不认可"| F["职场常态"]
+          C --> G["都不是因为你不够好"]
+          D --> G
+          E --> G
+          F --> G
+          G --> H["这个故事从头到尾就是假的"]
+          style A fill:#ff6b6b,color:#fff
+          style H fill:#51cf66,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>你不是不够好。你是把所有人的问题，都背到了自己身上。</strong>
+        <div class="sub">你给别人的善意，为什么不配给自己？你凭什么是唯一一个不被允许休息的人？</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.5 -->
+  <div class="section" id="s45">
+    <div class="section-header">
+      <h2><span class="num">05</span>你的"默认有罪"模式</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["别人伤害了你"] --> B["你的第一反应"]
+          B --> C["如果我更好就不会被伤害"]
+          C --> D{"三个致命漏洞"}
+          D --> E["漏洞一：你的优秀 ≠ 别人的行为"]
+          D --> F["漏洞二：永远无法证伪"]
+          F --> F1["90分被伤害→做到95分"]
+          F1 --> F2["99分还被伤害→还差一点"]
+          D --> G["漏洞三：偷换了责任"]
+          G --> G1["愤怒一出现就被截胡成自我改进"]
+          style C fill:#ff6b6b,color:#fff
+          style F2 fill:#ff6b6b,color:#fff
+          style G1 fill:#ffa94d,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>你以为"变更好"是盾牌，可以挡住一切伤害。但它不是盾牌——它是一个圈套，让你每次受伤都怪自己不够强。</strong>
+        <div class="sub">真正的强大不是"好到没有人能伤害我"。是"有人伤害我的时候，我知道那是他的问题，不是我的。"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 五 -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <h2><span class="num">06</span>鞭子的真相</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph LR
+          A["你以为的因果"] --> B["鞭打自己 → 成功"]
+          C["真实的因果"] --> D["天生聪明+驱动力 → 成功"]
+          C --> E["鞭打自己 → 痛苦"]
+          style A fill:#868e96,color:#fff
+          style B fill:#868e96,color:#fff
+          style D fill:#51cf66,color:#fff
+          style E fill:#ff6b6b,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>鞭子没有让你成功。你自己让自己成功的。</strong>
+        <div class="sub">鞭子只是让你在成功的路上，一直很痛苦。它是一个寄生虫，寄生在你的天赋上面，然后告诉你"没有我你活不了"。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 六 -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <h2><span class="num">07</span>为什么这两三年尤其不行了？</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["上学时：路是确定的"] --> B["鞭子有效"]
+          C["创业时：路是不确定的"] --> D["创业需要创造力和弹性"]
+          D --> E["这些全是鞭子摧毁的"]
+          B --> F["鞭子的有效期已过"]
+          E --> F
+          style F fill:#ff6b6b,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>鞭子只会说"你还不够好"。</strong>
+        <div class="sub">但创业需要你说"我现在就够好，我可以用我现有的能力去试"。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 七 -->
+  <div class="section mirror-card" id="s7">
+    <div class="section-header">
+      <h2><span class="num">08</span>你身边的镜子 —— 别人早就看见了</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr><th>谁</th><th>他们说了什么</th><th>在告诉你</th></tr>
+        <tr><td>Mecah</td><td>"注意不要丢了自己的特长"</td><td>你本身就有价值</td></tr>
+        <tr><td>Jacob</td><td>"不至于"</td><td>你不需要仰望别人</td></tr>
+        <tr><td>铭龙</td><td>"你为什么要证明自己？"</td><td>证明自己这件事本身就不合理</td></tr>
+        <tr><td>前男友</td><td>"你是世界上对我最好的人"</td><td>你的好，连对不起你的人都承认</td></tr>
+        <tr><td>Jeff</td><td>"因为你本来就是这样的人"</td><td>你已经优秀到吸引一群优秀的人</td></tr>
+        <tr><td>LING</td><td>"不用羡慕别人啦，自己走的每条路都值得骄傲"</td><td>你自己的路本身就值得</td></tr>
+        <tr><td>朋友</td><td>为你做了枝繁叶茂的树，另一人一秒猜出是你</td><td>你的全面，别人一眼认出</td></tr>
+        <tr><td>活动男生</td><td>热情说你有港风、穿搭有风格</td><td>你的魅力连陌生人都感受到</td></tr>
+        <tr><td>小芳</td><td>无数次夸你厉害，有困惑都来问你</td><td>你不只优秀，你是别人的灯塔</td></tr>
+        <tr><td>活动女生</td><td>"按单位时间算，你的一分钟最打动我"</td><td>一分钟的光芒胜过别人十分钟</td></tr>
+        <tr><td>搭讪的外国人</td><td>被你吸引，主动靠近</td><td>你的魅力跨越语言和文化</td></tr>
+        <tr><td>研究生同学</td><td>毕业5年后说你是"低调的大佬"</td><td>你的份量，时间过了别人还记得</td></tr>
+      </table>
+      <div class="golden-quote">
+        <strong>依据从来不缺。缺的是你愿意接收它。</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.5 -->
+  <div class="section" id="s75">
+    <div class="section-header">
+      <h2><span class="num">09</span>那棵树就是你</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["脑中的声音：没有人喜欢我"] --> B{"你自己说的事实"}
+          B --> C["高中两个清华同学追你"]
+          B --> D["研究生有人追你"]
+          B --> E["Soul几百人关注你"]
+          B --> F["活动上男生主动来找你"]
+          B --> G["朋友做的树一秒被认出"]
+          C --> J["声音甚至不需要是真的你就会信"]
+          D --> J
+          E --> J
+          F --> J
+          G --> J
+          J --> K["你站在挂满果实的树下只盯着没结果的树枝"]
+          style A fill:#ff6b6b,color:#fff
+          style J fill:#51cf66,color:#fff
+          style K fill:#ffa94d,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>你就像站在一棵挂满果实的树下，所有人都在说"这棵树真了不起"，而你抬头看着唯一一根还没结果的树枝说："你看，我就知道这棵树不行。"</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.6 -->
+  <div class="section" id="s76">
+    <div class="section-header">
+      <h2><span class="num">10</span>别把谦虚变成第二根鞭子</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph LR
+          A["你以为的空杯"] --> B["把水全倒掉"]
+          B --> C["每天从零开始"]
+          C --> D["永远觉得自己是空的"]
+          E["真正的空杯"] --> F["知道杯里有水"]
+          F --> G["在已有基础上装新水"]
+          G --> H["越来越满越来越强"]
+          style D fill:#ff6b6b,color:#fff
+          style H fill:#51cf66,color:#fff
+      </div>
+      <table>
+        <tr><th></th><th>你以为的谦虚</th><th>真正的谦虚</th></tr>
+        <tr><td>对过去</td><td>那些不算数，归零</td><td>那些是我的根基</td></tr>
+        <tr><td>对现在</td><td>我还不够好</td><td>已经很好，还可以更好</td></tr>
+        <tr><td>对未来</td><td>我必须证明自己</td><td>带着已有能力去探索</td></tr>
+      </table>
+      <div class="golden-quote">
+        <strong>自信和谦虚从来不矛盾。矛盾的是你把"谦虚"当成了另一根鞭子。</strong>
+        <div class="sub">那棵树的根已经扎得很深了。你要做的不是砍掉根来"保持空杯"，而是让它继续往上长。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.7 -->
+  <div class="section" id="s77">
+    <div class="section-header">
+      <h2><span class="num">11</span>每一句关心后面，都跟着一把刀</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["父亲的关心"] --> B["别把身体搞垮了 ✓"]
+          A --> C["何况你还没赚到钱 ✗"]
+          B --> D["你学到了：关心=会痛 被爱=要付代价"]
+          C --> D
+          E["父亲的特征"] --> F["很少笑 生气没预兆"]
+          F --> G["你从小活在高度警觉中"]
+          G --> H["时刻观察 提前讨好 绝不越界"]
+          H --> I["默认模式：他不高兴=我的错"]
+          I --> J["父亲→男友→前任→老板：对象换了模式没变"]
+          style D fill:#ff6b6b,color:#fff
+          style I fill:#ffa94d,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>你怕的不是那个男孩，你怕的是"他不高兴"。</strong>
+        <div class="sub">因为在你的经验里，别人不高兴 = 我的错 = 我要被惩罚。对象换了，模式没变过。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.8 -->
+  <div class="section" id="s78">
+    <div class="section-header">
+      <h2><span class="num">12</span>你从来没被示范过无条件的爱</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["妈妈教你的"] --> B["你说得过他吗？"]
+          B --> C["面对痛苦的人正确做法是忍"]
+          D["爸爸教你的"] --> E["优秀才有资格被爱"]
+          E --> F["不惹人生气才安全"]
+          C --> G["你学到的爱的公式"]
+          F --> G
+          G --> H["我的需求不重要"]
+          G --> I["别人的感受比我的重要"]
+          G --> J["我的任务是让所有人满意"]
+          H --> K["你让所有人都满意了——除了你自己"]
+          I --> K
+          J --> K
+          style G fill:#ff6b6b,color:#fff
+          style K fill:#e03131,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>你不是不会爱自己——你从来没被示范过怎么无条件地爱一个人。</strong>
+        <div class="sub">你见过的爱都是带条件的：优秀才被爱，赚钱才有资格，不惹人生气才安全。所以你对自己的方式也是一样的。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.9 -->
+  <div class="section" id="s79">
+    <div class="section-header">
+      <h2><span class="num">13</span>你不需要逃走，你需要一道边界</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph LR
+          A["父亲说：你还没赚到钱"] --> B{"旧模式 vs 新模式"}
+          B -->|"旧模式"| C["这是对我的审判"]
+          C --> D["更拼命更焦虑更熬夜"]
+          B -->|"新模式"| E["这是他的焦虑不是我的成绩单"]
+          E --> F["接受他的爱但不接受他的刀"]
+          style D fill:#ff6b6b,color:#fff
+          style F fill:#51cf66,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>他是你父亲，他有他的爱，也有他的局限。你可以接受他的爱，但你不需要接受他的刀。</strong>
+        <div class="sub">你不需要跟他吵，不需要说服他，也不需要逃走。你只需要不再把他的话当作对你的审判。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 八 -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <h2><span class="num">14</span>熬夜的真正代价</h2>
+    </div>
+    <div class="section-body">
+      <div class="mermaid">
+        graph TD
+          A["你最怕：白活一场"] --> B["拼命压榨每分钟"]
+          B --> C["但晚上11点到3点在做什么？"]
+          C --> D["刷视频、灵魂缺席"]
+          D --> E["这才是真正的虚此行"]
+          B --> F["长期睡眠不足"]
+          F --> G["心血管风险翻倍"]
+          F --> H["认知退化提前"]
+          F --> I["预期寿命缩短"]
+          G --> J["你在朝死亡冲刺"]
+          H --> J
+          I --> J
+          style E fill:#ff6b6b,color:#fff
+          style J fill:#e03131,color:#fff
+      </div>
+      <div class="golden-quote">
+        <strong>你以为你在对抗"白活了"，但你的行为本身就是"白活了"的定义。</strong>
+        <div class="sub">睡觉不是死亡的预演。睡觉是你能活得更久、活得更烈的唯一方式。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 九 -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <h2><span class="num">15</span>千分之一的人怎么做的？</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <tr><th>人物</th><th>做法</th><th>为什么</th></tr>
+        <tr><td>大谷翔平</td><td>每天睡10小时+</td><td>恢复是训练的一部分</td></tr>
+        <tr><td>Jeff Bezos</td><td>保证8小时睡眠</td><td>决策太重要，不能让疲惫拖累判断</td></tr>
+        <tr><td>顶尖特种兵</td><td>最重视恢复</td><td>极端压力下的精准判断</td></tr>
+      </table>
+      <div class="golden-quote">
+        <strong>真正千分之一的人，不是最能熬的人，是最懂得管理自己能量的人。</strong>
+        <div class="sub">你值得当自己的教练。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 十 -->
+  <div class="bedtime-card" id="s10">
+    <div class="section-header">
+      <h2>每晚四步：安然入睡</h2>
+    </div>
+    <div class="section-body">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>关机仪式</h3>
+          <p>固定时间写三句话：今天我做了什么 / 明天最重要的一件事 / 今天可以放下了</p>
+          <span class="step-tag">给你"可以停"的依据</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>手机隔离</h3>
+          <p>手机放到够不到的地方，用 20 块闹钟代替手机闹钟</p>
+          <span class="step-tag">切断麻醉剂的供给</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>身体呼吸</h3>
+          <p>感受后背压在床垫上的重量、被子的温度、呼气时身体往床里陷</p>
+          <span class="step-tag">把注意力从审判的声音转移到身体</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>15 分钟法则</h3>
+          <p>每天比前一天早睡 15 分钟，不追求一步到位</p>
+          <span class="step-tag">不让早睡变成新的鞭子</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 十三 -->
+  <div class="finale" id="s13">
+    <p>
+      你已经跑了二十多年了。<br>
+      从小学跑到研究生，从大公司跑到创业。<br>
+      从来没有人在终点等你，<br>
+      跟你说"你可以停了"。
+    </p>
+    <p style="margin-top: 24px;">
+      <span class="highlight">所以现在我说：</span>
+    </p>
+    <p style="margin-top: 16px;">
+      <span class="highlight">今天的训练到此为止。</span><br>
+      <span class="highlight">你做得很好。</span><br>
+      <span class="highlight">去休息。</span><br>
+      <span class="highlight">明天会更强。</span>
+    </p>
+    <p style="margin-top: 24px;">
+      你不需要"依据"来允许自己休息。<br>
+      <span class="highlight">活着本身就是依据。</span>
+    </p>
+    <p style="margin-top: 24px;">
+      今晚你不是在"允许自己休息"。<br>
+      <span class="highlight">你是在为明天的自己装弹药。</span>
+    </p>
+
+    <div class="divider" style="margin: 32px 0;"></div>
+
+    <p>
+      别人的问题不是你的问题。<br>
+      你不需要变得更好来"配得上"不被伤害。<br>
+      有人伤害你，那是他的局限，不是你的不足。<br>
+      <span class="highlight">把不属于你的重量放下来。你已经够重了。</span>
+    </p>
+
+    <div class="divider" style="margin: 32px 0;"></div>
+
+    <p>
+      你是一棵枝繁叶茂的树。<br>
+      朋友看见了，同学看见了，陌生人都看见了。<br>
+      唯独你还在数哪片叶子不够绿。
+    </p>
+    <p style="margin-top: 16px;">
+      <span class="highlight">今晚，不数了。</span><br>
+      <span class="highlight">这棵树很好。根不会跑掉的。</span><br>
+      <span class="highlight">明天醒来，它还在。</span>
+    </p>
+
+    <div class="divider" style="margin: 32px 0;"></div>
+
+    <p>
+      那个12岁的、<br>
+      在纸条上写着狠话吓自己的小女孩——<br>
+      她现在就坐在你床边，看着你。<br>
+      她很累。
+    </p>
+    <p style="margin-top: 16px;">
+      抱住她，对她说：
+    </p>
+    <p class="core">
+      "你不需要再吓自己了。<br>
+      你已经长大了。<br>
+      你很安全。你可以睡了。"
+    </p>
+
+    <div class="divider" style="margin: 32px 0;"></div>
+
+    <p>
+      你不需要让所有人满意。<br>
+      不需要让父亲满意，不需要让老板满意，<br>
+      不需要让任何人满意。<br>
+      <span class="highlight">你唯一需要让满意的人，是你自己。</span><br>
+      而今晚让你自己满意的方式，就是去睡觉。
+    </p>
+
+    <div class="divider" style="margin: 32px 0;"></div>
+
+    <p>
+      真正的爱，不是"你做到了我才爱你"。<br>
+      真正的爱，是"你什么都没做到，<br>
+      也值得被温柔对待"。<br>
+      你从来没见过这种爱。<br>
+      <span class="highlight">但你可以从今晚开始学。</span>
+    </p>
+
+    <div class="divider" style="margin: 32px 0;"></div>
+
+    <p>
+      爱自己不是天赋，是技能。<br>
+      今晚你累了，你就去睡。<br>
+      不用做完什么，不用达到什么标准。<br>
+      就因为你累了。
+    </p>
+    <p class="core">
+      这就是爱自己。
+    </p>
+
+    <div class="divider"></div>
+    <p class="date">2026年2月26日，一个普通的夜晚，你终于看见了自己。</p>
+  </div>
+
+</div>
+
+<button class="nav-toggle" id="navToggle" aria-label="导航">&#9776;</button>
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+  <div class="nav-title">目录导航</div>
+  <a href="#s1"><span class="nav-num">01</span>你以为的问题 vs 真正的问题</a>
+  <a href="#s2"><span class="nav-num">02</span>你每天的恶性循环</a>
+  <a href="#s3"><span class="nav-num">03</span>那个声音是怎么来的？</a>
+  <a href="#s4"><span class="nav-num">04</span>为别人的局限买单</a>
+  <a href="#s45"><span class="nav-num">05</span>你的"默认有罪"模式</a>
+  <a href="#s5"><span class="nav-num">06</span>鞭子的真相</a>
+  <a href="#s6"><span class="nav-num">07</span>为什么这两三年不行了？</a>
+  <div class="nav-divider"></div>
+  <a href="#s7"><span class="nav-num">08</span>你身边的镜子</a>
+  <a href="#s75"><span class="nav-num">09</span>那棵树就是你</a>
+  <a href="#s76"><span class="nav-num">10</span>别把谦虚变成鞭子</a>
+  <a href="#s77"><span class="nav-num">11</span>关心后面跟着一把刀</a>
+  <a href="#s78"><span class="nav-num">12</span>从没被示范过无条件的爱</a>
+  <a href="#s79"><span class="nav-num">13</span>你需要一道边界</a>
+  <div class="nav-divider"></div>
+  <a href="#s8"><span class="nav-num">14</span>熬夜的真正代价</a>
+  <a href="#s9"><span class="nav-num">15</span>千分之一的人怎么做的？</a>
+  <a href="#s10" class="nav-action"><span class="nav-num">16</span>每晚四步：安然入睡</a>
+  <a href="#s13" class="nav-finale"><span class="nav-num">末</span>睡前默念 —— 写给你的话</a>
+</div>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const drawer = document.getElementById('navDrawer');
+  const overlay = document.getElementById('navOverlay');
+
+  function openNav() {
+    drawer.classList.add('show');
+    overlay.classList.add('show');
+    toggle.classList.add('open');
+    toggle.innerHTML = '&#10005;';
+  }
+  function closeNav() {
+    drawer.classList.remove('show');
+    overlay.classList.remove('show');
+    toggle.classList.remove('open');
+    toggle.innerHTML = '&#9776;';
+  }
+  toggle.addEventListener('click', () => {
+    drawer.classList.contains('show') ? closeNav() : openNav();
+  });
+  overlay.addEventListener('click', closeNav);
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      closeNav();
+    });
+  });
+</script>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      primaryColor: '#0f3460',
+      primaryTextColor: '#e8e8e8',
+      primaryBorderColor: '#e94560',
+      lineColor: '#a0a0b8',
+      secondaryColor: '#16213e',
+      tertiaryColor: '#1a1a2e',
+      fontSize: '13px'
+    },
+    flowchart: {
+      curve: 'basis',
+      padding: 12,
+      useMaxWidth: true
+    }
+  });
+</script>
+
+</body>
+</html>
