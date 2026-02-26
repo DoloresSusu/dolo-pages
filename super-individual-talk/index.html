@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从大厂裸辞后 — 多乐 Dolores</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #F5F0E8;
+  --dark: #1C1C1C;
+  --red: #B82020;
+  --text: #2C2C2C;
+  --light: #F5F0E8;
+  --gray: #999;
+  --gray-light: #ccc;
+  --serif: 'Noto Serif SC', '宋体', 'SimSun', serif;
+  --sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --english: 'Playfair Display', 'Georgia', serif;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Slide Engine ===== */
+.deck { position: relative; width: 100%; height: 100%; }
+
+.slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 60px 100px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--cream);
+  color: var(--text);
+  font-family: var(--sans);
+}
+.slide.active { opacity: 1; pointer-events: auto; }
+.slide.dark { background: var(--dark); color: var(--light); }
+
+.inner {
+  max-width: 1100px; width: 100%;
+  text-align: center;
+}
+.inner.left { text-align: left; }
+
+/* ===== Typography ===== */
+.mega {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(56px, 9vw, 130px);
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+}
+.big {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(40px, 6vw, 80px);
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+}
+.large {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(28px, 3.8vw, 56px);
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+.mid {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: clamp(18px, 2.2vw, 32px);
+  line-height: 1.7;
+}
+.sm {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(14px, 1.4vw, 22px);
+  line-height: 1.8;
+  color: var(--gray);
+}
+.dark .sm { color: #777; }
+
+.red { color: var(--red); }
+.muted { opacity: 0.4; }
+.eng { font-family: var(--english); font-style: italic; }
+.serif { font-family: var(--serif); }
+.bold { font-weight: 700; }
+.light { font-weight: 300; }
+
+.spacer-s { height: 16px; }
+.spacer { height: 32px; }
+.spacer-l { height: 48px; }
+.spacer-xl { height: 64px; }
+
+/* ===== Entrance Animation ===== */
+.slide.active .fi {
+  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.slide.active .fi:nth-child(2) { animation-delay: 0.1s; }
+.slide.active .fi:nth-child(3) { animation-delay: 0.2s; }
+.slide.active .fi:nth-child(4) { animation-delay: 0.3s; }
+.slide.active .fi:nth-child(5) { animation-delay: 0.4s; }
+.slide.active .fi:nth-child(6) { animation-delay: 0.5s; }
+.slide.active .fi:nth-child(7) { animation-delay: 0.6s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Components ===== */
+
+/* Progress Bar */
+.progress {
+  position: fixed; bottom: 0; left: 0; height: 3px;
+  background: var(--red);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+/* Slide Counter */
+.counter {
+  position: fixed; bottom: 14px; right: 22px;
+  font-family: var(--sans); font-size: 13px; font-weight: 300;
+  color: #888; z-index: 100;
+  transition: color 0.6s;
+}
+.counter.on-dark { color: #555; }
+
+/* Keyboard Hint */
+.hint {
+  position: fixed; bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.75); color: #ddd;
+  padding: 10px 28px; border-radius: 8px;
+  font-family: var(--sans); font-size: 13px; letter-spacing: 0.5px;
+  z-index: 200;
+  transition: opacity 0.8s;
+}
+.hint.hide { opacity: 0; pointer-events: none; }
+
+/* Asset Placeholder */
+.placeholder {
+  border: 2px dashed var(--gray-light);
+  border-radius: 16px;
+  padding: 48px 32px;
+  color: #bbb;
+  font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px;
+  min-height: 200px;
+  font-family: var(--sans);
+}
+.placeholder .icon { font-size: 36px; opacity: 0.4; }
+.dark .placeholder { border-color: #444; color: #555; }
+
+/* Video */
+.video-box {
+  width: 100%; max-width: 720px; margin: 0 auto;
+  border-radius: 12px; overflow: hidden;
+  background: #000;
+}
+.video-box video { width: 100%; display: block; }
+
+/* QR Grid */
+.qr-grid {
+  display: flex; gap: 64px;
+  justify-content: center; align-items: flex-start;
+  flex-wrap: wrap;
+}
+.qr-item { text-align: center; }
+.qr-item .placeholder {
+  width: 180px; height: 180px; min-height: auto;
+  padding: 20px; margin-bottom: 12px;
+}
+.qr-item .placeholder img {
+  width: 100%; height: 100%; object-fit: contain;
+  display: block;
+}
+
+/* Leverage Grid */
+.lev-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 48px;
+  max-width: 700px; margin: 0 auto;
+  text-align: center;
+}
+.lev-card {
+  padding: 28px 20px;
+  border-radius: 12px;
+  border: 1.5px solid #ddd;
+}
+.lev-card.old { opacity: 0.45; }
+.lev-card.new { border-color: var(--red); }
+.lev-card .label {
+  font-family: var(--serif); font-weight: 900;
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: 0.08em;
+}
+.lev-card .new .label { color: var(--red); }
+.lev-card .desc {
+  font-size: clamp(13px, 1.2vw, 17px); color: var(--gray);
+  margin-top: 8px;
+}
+
+/* Number compare */
+.num-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(24px, 5vw, 80px);
+}
+.num-block { text-align: center; }
+.num-block .num {
+  font-family: var(--serif); font-weight: 900;
+  font-size: clamp(64px, 12vw, 160px);
+  line-height: 1;
+}
+.num-block .num-label {
+  font-size: clamp(14px, 1.5vw, 22px);
+  color: var(--gray); margin-top: 12px;
+}
+.arrow-right {
+  font-size: clamp(32px, 4vw, 56px);
+  color: var(--gray); font-weight: 300;
+}
+
+/* Two column */
+.two-col {
+  display: flex; gap: 48px; justify-content: center;
+  flex-wrap: wrap;
+}
+.col { flex: 1; min-width: 260px; max-width: 420px; text-align: left; }
+.col-title {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 32px);
+  margin-bottom: 16px;
+}
+.col ul {
+  list-style: none; padding: 0;
+  font-size: clamp(15px, 1.5vw, 22px); line-height: 2;
+}
+
+/* ===== Section Tag (top-left) ===== */
+.section-tag {
+  position: absolute;
+  top: 28px; left: 36px;
+  font-family: var(--sans);
+  font-size: clamp(12px, 1.1vw, 15px);
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  z-index: 10;
+}
+.section-tag .tag-num {
+  color: var(--red);
+  font-weight: 700;
+  margin-right: 8px;
+}
+.section-tag .tag-label { color: #aaa; }
+.dark .section-tag .tag-label { color: #555; }
+
+/* ===== Contents / TOC ===== */
+.toc {
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 680px; margin: 0 auto;
+  text-align: left;
+}
+.toc-item {
+  display: flex; align-items: baseline; gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e0dbd3;
+}
+.toc-item:last-child { border-bottom: none; }
+.toc-num {
+  font-family: var(--serif); font-weight: 900;
+  font-size: clamp(14px, 1.5vw, 20px);
+  color: var(--red);
+  min-width: 28px;
+}
+.toc-label {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(18px, 2.2vw, 28px);
+  color: var(--text);
+}
+.toc-sub {
+  font-family: var(--sans); font-weight: 300;
+  font-size: clamp(13px, 1.2vw, 17px);
+  color: var(--gray);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* ===== VoInko Layout ===== */
+.voInko-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 3vw, 40px);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.voInko-photo {
+  flex: 0 0 auto;
+}
+.voInko-photo img {
+  height: clamp(200px, 32vh, 360px);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  object-fit: cover;
+}
+.voInko-products {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+}
+.voInko-hw {
+  height: clamp(140px, 22vh, 240px);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  object-fit: contain;
+}
+.voInko-phone {
+  height: clamp(160px, 26vh, 280px);
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  object-fit: contain;
+}
+
+/* ===== Mobile Nav Buttons ===== */
+.mobile-nav {
+  display: none; /* hidden on desktop */
+  position: fixed; bottom: 16px; left: 0; right: 0;
+  justify-content: center; gap: 32px;
+  z-index: 200;
+}
+.nav-btn {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--text);
+  font-size: 24px; line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+.nav-btn:active { background: rgba(0,0,0,0.08); border-color: var(--red); }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .slide {
+    padding: 32px 24px;
+    overflow-y: auto;
+    align-items: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+  .inner { padding: 40px 0; }
+
+  /* Typography scale down */
+  .mega { font-size: clamp(36px, 10vw, 56px); }
+  .big  { font-size: clamp(28px, 7vw, 40px); }
+  .large { font-size: clamp(22px, 5vw, 32px); }
+  .mid  { font-size: clamp(15px, 3.8vw, 20px); }
+  .sm   { font-size: clamp(12px, 3vw, 15px); }
+
+  /* TOC: stack label and sub vertically */
+  .toc-item {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding: 12px 0;
+  }
+  .toc-label { font-size: clamp(16px, 4.5vw, 22px); }
+  .toc-sub {
+    white-space: normal;
+    margin-left: 40px;
+    font-size: clamp(12px, 3vw, 14px);
+  }
+
+  /* Leverage grid */
+  .lev-grid { gap: 12px 16px; }
+  .lev-card { padding: 16px 12px; }
+  .lev-card .label { font-size: clamp(22px, 6vw, 32px); }
+
+  /* Number row */
+  .num-row { gap: 16px; }
+  .num-block .num { font-size: clamp(48px, 15vw, 80px); }
+
+  /* Two column */
+  .two-col { flex-direction: column; align-items: center; gap: 28px; }
+
+  /* QR grid: 3 items in a row on mobile */
+  .qr-grid { gap: 16px; }
+  .qr-item .placeholder {
+    width: 100px; height: 100px;
+    padding: 8px; margin-bottom: 8px;
+  }
+
+  /* Section tag */
+  .section-tag { top: 12px; left: 16px; }
+
+  /* Spacers smaller on mobile */
+  .spacer-xl { height: 32px; }
+  .spacer-l  { height: 24px; }
+  .spacer    { height: 16px; }
+  .spacer-s  { height: 8px; }
+
+  /* VoInko layout mobile */
+  .voInko-layout { flex-direction: column; gap: 16px; }
+  .voInko-photo img { height: clamp(140px, 22vh, 200px); }
+  .voInko-products { gap: 10px; }
+  .voInko-hw { height: clamp(90px, 14vh, 140px); }
+  .voInko-phone { height: clamp(100px, 16vh, 160px); }
+
+  /* Counter & progress */
+  .counter { bottom: 10px; right: 14px; font-size: 11px; }
+  .hint { display: none; } /* hide keyboard hint on mobile */
+  .mobile-nav { display: flex; } /* show nav buttons on mobile */
+}
+</style>
+</head>
+
+<body>
+<div class="deck">
+
+<!-- ======================== SLIDE 1: Title ======================== -->
+<section class="slide active" data-theme="light">
+<div class="inner">
+  <div class="fi large" style="margin-bottom: 24px;">从大厂裸辞后</div>
+  <div class="fi big red">如何用AI重塑工作<br>成为"超级个体"</div>
+  <div class="spacer-l"></div>
+  <div class="fi sm">多乐 Dolores</div>
+  <div class="fi sm" style="margin-top: 4px;">港中大(深圳)金融硕士 · 前大厂产品经理 · 万人 AI 社群活动主理人 · AI智能硬件创业者</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 2: Contents ======================== -->
+<section class="slide" data-theme="light">
+<div class="inner">
+  <div class="fi large red" style="margin-bottom: 40px;">Contents</div>
+  <div class="fi toc">
+    <div class="toc-item">
+      <span class="toc-num">01</span>
+      <span class="toc-label">起因 · 困在系统里</span>
+      <span class="toc-sub">三级 battle · PUA · 迷惑操作</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">02</span>
+      <span class="toc-label">转折 · 想好了就走</span>
+      <span class="toc-sub">知行合一</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">03</span>
+      <span class="toc-label">觉醒 · 读到 Naval 的那一刻</span>
+      <span class="toc-sub">四种杠杆 · AI = 最大杠杆</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">04</span>
+      <span class="toc-label">行动 · 成为超级个体</span>
+      <span class="toc-sub">用AI重塑工作 · 一个人 = 一支队伍</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">05</span>
+      <span class="toc-label">现在 · 好的与真实的</span>
+      <span class="toc-sub">VoInko · 头铁</span>
+    </div>
+    <div class="toc-item">
+      <span class="toc-num">06</span>
+      <span class="toc-label">感悟 · 每条路都 make sense</span>
+      <span class="toc-sub">约束条件 · 目标函数</span>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 3: 三级Battle ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">01</span><span class="tag-label">起因 · 困在系统里</span></div>
+<div class="inner">
+  <div class="fi sm" style="margin-bottom: 24px; letter-spacing: 3px;">大厂日常</div>
+  <div class="fi large serif" style="line-height:1.7;">
+    "我带着我老板<br>
+    还有我老板的老板<br>
+    三个级别的人<br>
+    跟对方三个级别的人<br>
+    <span class="red">battle</span>"
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 4: 迷惑操作 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">01</span><span class="tag-label">起因 · 困在系统里</span></div>
+<div class="inner">
+  <div class="fi sm" style="margin-bottom: 24px; letter-spacing: 3px;">迷惑操作</div>
+  <div class="fi big">一个岗位<br><span class="red">两个人</span></div>
+  <div class="spacer"></div>
+  <div class="fi mid">完完全全平级 · 没有分工</div>
+  <div class="fi mid" style="margin-top:8px;">这俩人还闹矛盾，互相不通气</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 5: PUA ======================== -->
+<section class="slide dark" data-theme="dark">
+<div class="section-tag"><span class="tag-num">01</span><span class="tag-label">起因 · 困在系统里</span></div>
+<div class="inner">
+  <div class="fi big" style="line-height:1.6;">
+    "以前身边都是<span class="red">批评</span>的声音<br>
+    我也没得选择"
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 6: 知行合一 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">02</span><span class="tag-label">转折 · 想好了就走</span></div>
+<div class="inner">
+  <div class="fi mega red">知行合一</div>
+  <div class="spacer-l"></div>
+  <div class="fi mid">
+    "如果有人来问你该不该离职<br>那说明他没想好，答案就是不要离职"
+  </div>
+  <div class="spacer-s"></div>
+  <div class="fi mid"><strong>"真正想好的人，就是会立刻去行动"</strong></div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 7: Gap + 读书 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">03</span><span class="tag-label">觉醒 · 读到 Naval 的那一刻</span></div>
+<div class="inner">
+  <div class="fi mega muted" style="letter-spacing:0.15em;">GAP</div>
+  <div class="spacer"></div>
+  <div class="fi large">读了很多书</div>
+  <div class="spacer"></div>
+  <div class="fi mid">其中一本，振聋发聩——</div>
+  <div class="fi large serif red" style="margin-top: 16px;">《纳瓦尔宝典》</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 8: 四种杠杆 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">03</span><span class="tag-label">觉醒 · 读到 Naval 的那一刻</span></div>
+<div class="inner">
+  <div class="fi large" style="margin-bottom: 40px;">Naval 的<span class="red">四种杠杆</span></div>
+  <div class="fi lev-grid">
+    <div class="lev-card old fi">
+      <div class="label">劳动力</div>
+      <div class="desc">雇人帮你干活</div>
+    </div>
+    <div class="lev-card old fi">
+      <div class="label">资本</div>
+      <div class="desc">用钱生钱</div>
+    </div>
+    <div class="lev-card new fi">
+      <div class="label red">代码</div>
+      <div class="desc">24小时帮你工作</div>
+    </div>
+    <div class="lev-card new fi">
+      <div class="label red">媒体</div>
+      <div class="desc">无限次传播</div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="fi sm">传统杠杆门槛高 → 新杠杆<strong style="color:var(--text);">不需要许可</strong></div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 9: AI = 最大杠杆 ======================== -->
+<section class="slide dark" data-theme="dark">
+<div class="section-tag"><span class="tag-num">03</span><span class="tag-label">觉醒 · 读到 Naval 的那一刻</span></div>
+<div class="inner">
+  <div class="fi mid" style="color:#888; margin-bottom: 20px;">AI 又是劳动力 · 又能写代码 · 又能做媒体</div>
+  <div class="fi mega red" style="letter-spacing: 0.08em;">AI</div>
+  <div class="fi big" style="color: var(--light); margin-top: 8px;">= 这个时代的<span class="red">最大杠杆</span></div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 10: 用AI重塑工作 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">04</span><span class="tag-label">行动 · 成为超级个体</span></div>
+<div class="inner">
+  <div class="fi large" style="margin-bottom: 48px;">用AI<span class="red">重塑工作</span></div>
+  <div class="fi two-col" style="gap: 64px;">
+    <div class="col" style="max-width: 380px;">
+      <div class="col-title red">层面一</div>
+      <div class="mid" style="line-height:1.8;">根据 Naval 的理论<br><strong>定制独一无二的工作</strong></div>
+    </div>
+    <div class="col" style="max-width: 380px;">
+      <div class="col-title red">层面二</div>
+      <div class="mid" style="line-height:1.8;">用 AI 工具<br><strong>打造自己的工作流</strong><br>信息的输入与输出</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 11: 番茄钟 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">04</span><span class="tag-label">行动 · 成为超级个体</span></div>
+<div class="inner">
+  <div class="fi mega red" style="font-variant-numeric: tabular-nums;">7.14</div>
+  <div class="spacer"></div>
+  <div class="fi mid">用 Deepseek 自己写代码、自己 debug</div>
+  <div class="fi mid" style="margin-top: 4px;">做出了一个 <strong>iOS 番茄钟 APP</strong></div>
+  <div class="spacer-l"></div>
+  <div class="fi">
+    <!-- 番茄钟 APP 截图 -->
+    <div style="max-width:280px; margin:0 auto;">
+      <img src="assets/tomato-app.png" alt="番茄钟 APP"
+        style="width:100%; border-radius:16px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="placeholder" style="display:none; min-height:160px;">
+        <div class="icon">📱</div>
+        <div>请放入 assets/tomato-app.png</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 11: Magician ======================== -->
+<section class="slide dark" data-theme="dark">
+<div class="section-tag"><span class="tag-num">04</span><span class="tag-label">行动 · 成为超级个体</span></div>
+<div class="inner">
+  <div class="fi mid" style="color:#777;">"每天打开电脑<br>觉得自己好像是一个"</div>
+  <div class="spacer"></div>
+  <div class="fi mega eng red" style="font-size: clamp(72px, 14vw, 180px);">Magician</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 13: 超级个体 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">04</span><span class="tag-label">行动 · 成为超级个体</span></div>
+<div class="inner">
+  <div class="fi large" style="margin-bottom: 12px;"><span class="red">超级个体</span></div>
+  <div class="fi mid" style="margin-bottom: 48px; color: var(--gray);">不是什么都自己干的人<br>而是<strong style="color:var(--text);">能借助工具放大自己能力</strong>的人</div>
+  <div class="fi" style="display: flex; justify-content: center; gap: clamp(16px, 3vw, 40px); flex-wrap: wrap;">
+    <div style="background:#fff; border-radius:12px; padding: 20px 28px; min-width: 140px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+      <div style="font-family:var(--serif); font-weight:900; font-size: clamp(18px, 2vw, 26px); color: var(--red);">产品经理</div>
+    </div>
+    <div style="background:#fff; border-radius:12px; padding: 20px 28px; min-width: 140px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+      <div style="font-family:var(--serif); font-weight:900; font-size: clamp(18px, 2vw, 26px); color: var(--red);">交互设计</div>
+    </div>
+    <div style="background:#fff; border-radius:12px; padding: 20px 28px; min-width: 140px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+      <div style="font-family:var(--serif); font-weight:900; font-size: clamp(18px, 2vw, 26px); color: var(--red);">前端开发</div>
+    </div>
+    <div style="background:#fff; border-radius:12px; padding: 20px 28px; min-width: 140px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);">
+      <div style="font-family:var(--serif); font-weight:900; font-size: clamp(18px, 2vw, 26px); color: var(--red);">媒体运营</div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="fi sm">"一个人能把想法推进到可以拿出来给别人看的程度"</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 14: 60 → 100 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">04</span><span class="tag-label">行动 · 成为超级个体</span></div>
+<div class="inner">
+  <div class="fi sm" style="margin-bottom: 40px;">能量调动</div>
+  <div class="fi num-row">
+    <div class="num-block">
+      <div class="num muted">60<span style="font-size:0.5em;">%</span></div>
+      <div class="num-label">以前上班</div>
+    </div>
+    <div class="arrow-right">→</div>
+    <div class="num-block">
+      <div class="num red">100<span style="font-size:0.5em;">%</span></div>
+      <div class="num-label">现在</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 13: VoInko ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">05</span><span class="tag-label">现在 · 好的与真实的</span></div>
+<div class="inner">
+  <div class="fi" style="display: flex; align-items: center; justify-content: center; gap: clamp(12px, 2vw, 20px); margin-bottom: 12px;">
+    <img src="assets/VoInko_Logo_V1.png" alt="VoInko Logo" style="height: clamp(40px, 5vh, 64px); object-fit: contain;">
+    <span class="large" style="font-family: var(--english); font-style: italic; color: var(--text); letter-spacing: 0.02em;">VoInko</span>
+  </div>
+  <div class="fi mid" style="margin-bottom: 32px;">跟合伙人 · 一个月 · 手搓AI智能软硬件</div>
+  <div class="fi voInko-layout">
+    <div class="voInko-photo">
+      <img src="assets/user_test.png" alt="用户测试">
+    </div>
+    <div class="voInko-products">
+      <img src="assets/voInko1.png" alt="VoInko 硬件端" class="voInko-hw">
+      <img src="assets/voInko2.png" alt="VoInko APP端" class="voInko-phone">
+    </div>
+  </div>
+  <div class="fi sm" style="margin-top: 20px;">墨水屏 + 手机APP · 语音录入待办与灵感</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 14: 诚实的现在 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">05</span><span class="tag-label">现在 · 好的与真实的</span></div>
+<div class="inner">
+  <div class="fi large" style="margin-bottom: 40px;">诚实的现在</div>
+  <div class="fi two-col">
+    <div class="col">
+      <div class="col-title" style="color: #2a7a2a;">✓ 好的</div>
+      <ul>
+        <li>这辈子最想做的事情</li>
+        <li>可以选择跟舒服的伙伴合作</li>
+        <li>时间好像被加速了</li>
+      </ul>
+    </div>
+    <div class="col">
+      <div class="col-title" style="color: var(--red);">✗ 真实的</div>
+      <ul>
+        <li>还没有稳定现金流</li>
+        <li>偶尔还是会焦虑</li>
+        <li>爸妈不一定完全理解</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 15: 头铁 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">05</span><span class="tag-label">现在 · 好的与真实的</span></div>
+<div class="inner">
+  <div class="fi big" style="line-height:1.6;">
+    "我这种非常<span class="red">头铁</span>的行为<br>
+    不一定适合每一个人"
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 16: AI 谄媚实验 ======================== -->
+<section class="slide" data-theme="light">
+<div class="section-tag"><span class="tag-num">06</span><span class="tag-label">感悟 · 每条路都 make sense</span></div>
+<div class="inner">
+  <div class="fi sm" style="margin-bottom: 24px; letter-spacing: 3px;">一个实验</div>
+  <div class="fi large">让 AI 扮演名人给你建议？</div>
+  <div class="spacer"></div>
+  <div class="fi mid">它会<span class="red">谄媚</span>你</div>
+  <div class="fi mid" style="margin-top:4px; color:var(--gray);">"你不是不够好，而是外部环境有问题"</div>
+  <div class="spacer-l"></div>
+  <div class="fi large serif">
+    "你让 AI 不要谄媚你<br>
+    用尖锐的观点来回复你"
+  </div>
+  <div class="spacer-s"></div>
+  <div class="fi large red serif">他就会变成另一副嘴脸</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 17: 千万条路 ======================== -->
+<section class="slide dark" data-theme="dark">
+<div class="section-tag"><span class="tag-num">06</span><span class="tag-label">感悟 · 每条路都 make sense</span></div>
+<div class="inner">
+  <div class="fi big" style="line-height:1.5;">
+    这世界上千万条路<br>
+    <span class="red">每条路都 make sense</span>
+  </div>
+  <div class="spacer-l"></div>
+  <div class="fi large" style="color: var(--light); line-height: 1.6;">
+    前提是你要知道你的<br>
+    <span class="red">约束条件</span>和<span class="red">目标函数</span>
+  </div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 18: 终于 ======================== -->
+<section class="slide dark" data-theme="dark">
+<div class="section-tag"><span class="tag-num">06</span><span class="tag-label">感悟 · 每条路都 make sense</span></div>
+<div class="inner">
+  <div class="fi mega red" style="line-height:1.3;">做个勇敢的人<br>允许一切发生</div>
+</div>
+</section>
+
+<!-- ======================== SLIDE 19: 谢谢 ======================== -->
+<section class="slide" data-theme="light">
+<div class="inner">
+  <div class="fi mega" style="margin-bottom: 20px;">谢谢</div>
+  <div class="fi mid" style="margin-bottom: 8px;">我会持续记录一个人用 AI 搞事情的过程</div>
+  <div class="fi sm" style="margin-bottom: 40px;">踩过的坑、用过的工具、真实的感受</div>
+  <div class="fi large serif" style="margin-bottom: 40px;"><span class="red">Dolo多乐的AI笔记</span></div>
+  <div class="fi qr-grid">
+    <div class="qr-item">
+      <div class="placeholder">
+        <img src="assets/qr-personal.png" alt="公众号" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=icon>📱</div><div>assets/qr-personal.png</div>'">
+      </div>
+      <div class="sm" style="color: var(--text);">公众号</div>
+    </div>
+    <div class="qr-item">
+      <div class="placeholder">
+        <img src="assets/qr-xiaohongshu.png" alt="小红书" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=icon>📱</div><div>assets/qr-xiaohongshu.png</div>'">
+      </div>
+      <div class="sm" style="color: var(--text);">小红书</div>
+    </div>
+    <div class="qr-item">
+      <div class="placeholder">
+        <img src="assets/qr-voInko.png" alt="VoInko" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=icon>📱</div><div>assets/qr-voInko.png</div>'">
+      </div>
+      <div class="sm" style="color: var(--text);">VoInko 公众号</div>
+    </div>
+  </div>
+</div>
+</section>
+
+</div><!-- .deck -->
+
+<!-- Progress bar -->
+<div class="progress" id="progress"></div>
+
+<!-- Slide counter -->
+<div class="counter" id="counter">1 / 21</div>
+
+<!-- Keyboard hint (desktop) -->
+<div class="hint" id="hint">← →  翻页　｜　G + 数字  跳页　｜　F  全屏</div>
+
+<!-- Mobile nav buttons -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="nav-btn" id="btn-prev" aria-label="上一页">‹</button>
+  <button class="nav-btn" id="btn-next" aria-label="下一页">›</button>
+</div>
+
+<script>
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const progress = document.getElementById('progress');
+  const counter = document.getElementById('counter');
+  const hint = document.getElementById('hint');
+
+  // Hide hint after 4 seconds
+  setTimeout(() => hint.classList.add('hide'), 4000);
+
+  function go(index) {
+    if (index < 0 || index >= total) return;
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+
+    // Scroll new slide back to top (for mobile overflow)
+    slides[current].scrollTop = 0;
+
+    // Update progress bar
+    progress.style.width = ((current + 1) / total * 100) + '%';
+
+    // Update counter
+    counter.textContent = (current + 1) + ' / ' + total;
+
+    // Counter color based on slide theme
+    const isDark = slides[current].dataset.theme === 'dark';
+    counter.classList.toggle('on-dark', isDark);
+  }
+
+  function next() { go(current + 1); }
+  function prev() { go(current - 1); }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    // Hide hint on any key
+    hint.classList.add('hide');
+
+    switch(e.key) {
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+        e.preventDefault(); prev(); break;
+      case 'Home':
+        e.preventDefault(); go(0); break;
+      case 'End':
+        e.preventDefault(); go(total - 1); break;
+      case 'f': case 'F':
+        e.preventDefault();
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(()=>{});
+        } else {
+          document.exitFullscreen();
+        }
+        break;
+    }
+  });
+
+  // Touch / swipe support (horizontal only, won't conflict with scroll)
+  let touchX = 0, touchY = 0;
+  document.addEventListener('touchstart', function(e) {
+    touchX = e.changedTouches[0].screenX;
+    touchY = e.changedTouches[0].screenY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    const dx = e.changedTouches[0].screenX - touchX;
+    const dy = e.changedTouches[0].screenY - touchY;
+    // Only trigger swipe if horizontal movement > vertical (not scrolling)
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      dx < 0 ? next() : prev();
+    }
+  }, { passive: true });
+
+  // Hide video placeholder if video loads
+  const vid = document.querySelector('.video-box video');
+  if (vid) {
+    vid.addEventListener('loadedmetadata', function() {
+      const ph = document.getElementById('video-ph');
+      if (ph) ph.style.display = 'none';
+    });
+    vid.addEventListener('error', function() {
+      vid.style.display = 'none';
+    }, true);
+  }
+
+  // Jump to slide: press G, type number, Enter
+  let jumpMode = false;
+  let jumpBuf = '';
+  document.addEventListener('keydown', function(e) {
+    if (jumpMode) {
+      if (e.key === 'Enter') {
+        const n = parseInt(jumpBuf);
+        if (n >= 1 && n <= total) go(n - 1);
+        jumpMode = false; jumpBuf = '';
+        counter.style.color = '';
+        counter.textContent = (current + 1) + ' / ' + total;
+      } else if (e.key === 'Escape') {
+        jumpMode = false; jumpBuf = '';
+        counter.style.color = '';
+        counter.textContent = (current + 1) + ' / ' + total;
+      } else if (e.key === 'Backspace') {
+        jumpBuf = jumpBuf.slice(0, -1);
+        counter.textContent = 'Go → ' + (jumpBuf || '_');
+      } else if (/\d/.test(e.key)) {
+        jumpBuf += e.key;
+        counter.textContent = 'Go → ' + jumpBuf;
+      }
+      e.preventDefault();
+      return;
+    }
+    if (e.key === 'g' && !e.metaKey && !e.ctrlKey) {
+      jumpMode = true; jumpBuf = '';
+      counter.style.color = 'var(--red)';
+      counter.textContent = 'Go → _';
+      e.preventDefault();
+    }
+  }, true);
+
+  // URL hash support: index.html#5 → go to slide 5
+  function readHash() {
+    const h = parseInt(location.hash.replace('#', ''));
+    if (h >= 1 && h <= total) go(h - 1);
+  }
+  window.addEventListener('hashchange', readHash);
+
+  // Mobile nav buttons
+  var btnPrev = document.getElementById('btn-prev');
+  var btnNext = document.getElementById('btn-next');
+  if (btnPrev) btnPrev.addEventListener('click', prev);
+  if (btnNext) btnNext.addEventListener('click', next);
+
+  // Init
+  if (location.hash) readHash(); else go(0);
+})();
+</script>
+</body>
+</html>

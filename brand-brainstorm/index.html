@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 这里是注释内容 -->
+    <title>新品牌命名方案提案 | Creators AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --accent: #ec4899;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --text: #0f172a;
+            --text-dim: #64748b;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 18px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 48px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            margin-bottom: 24px;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .cn-name {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .slash {
+            color: var(--text-dim);
+            font-weight: 300;
+            font-size: 1.8rem;
+        }
+
+        .en-name {
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .slogan {
+            font-size: 1.3rem;
+            color: var(--text);
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--card-border);
+        }
+
+        .reason-box {
+            flex-grow: 1;
+            margin-bottom: 30px;
+        }
+
+        .reason-title {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: block;
+            letter-spacing: 1px;
+        }
+
+        .reason-content {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        .logo-prompt-box {
+            background: #f1f5f9;
+            padding: 24px;
+            border-radius: 16px;
+            border-left: 4px solid var(--primary);
+            position: relative;
+        }
+
+        .logo-prompt-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 8px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-prompt-text {
+            font-size: 0.95rem;
+            color: var(--text);
+            font-style: italic;
+            line-height: 1.5;
+            padding-right: 60px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: white;
+            border: 1px solid var(--card-border);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: white;
+            border-color: #22c55e;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 100px 0 60px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1024px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">Brand Identity Proposal / 品牌提案</div>
+            <h1>新品牌命名方案</h1>
+            <p class="subtitle">继承实战基因，提供更广阔的阅读视野，支持 Logo 创意一键复制</p>
+        </header>
+
+        <div class="grid">
+            <!-- Option 1 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">构筑环</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">BUILD LOOP</span>
+                </div>
+                <p class="slogan">“循环往复，构筑不止。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        最具“血缘感”。与 Hackathon Weekly 形成完美的“动静结合”——周周是极致的终点展示，你是持续的成长闭环，强调不间断的迭代。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-1">Infinity symbol merged with a pixelated circle, neon blue,
+                        minimalist and geometric.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-1', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 2 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">智流</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">AIGEN FLOW</span>
+                </div>
+                <p class="slogan">“与智同行，入流生活。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        极具个人审美。将 AI 技术降维为一种顺滑的生活方式，不仅教工具，更教如何以 AI 的方式“入流”。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-2">Fluid liquid metal shape forming an abstract 'A', white
+                        pearl and soft violet, ultra-sleek.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-2', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 3 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">时刻构建录</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">BUILD MOMENTS</span>
+                </div>
+                <p class="slogan">“捕捉灵机一动的构建瞬间。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        动宾结构的五字韵律。相比周周的仪式感，它更细腻、生活化，像记录生活一样记录每一次 AI 创作。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-3">Hourglass icon with a digital building block inside, soft
+                        pastel gradient, tactile feel.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-3', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 4 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">跃迁实验室</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">LEAP LAB</span>
+                </div>
+                <p class="slogan">“实现认知的非线性跳跃。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        极具“引流相”。直击用户痛点：为了实现认知的“跃迁”。“实验”感极大降低了学习压力。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-4">Upward arrow made of glass geometric shards, vibrant
+                        energetic gradient, tech-start-up vibe.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-4', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 5 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">灵动工作流</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">VIBE FLOW</span>
+                </div>
+                <p class="slogan">“定义 AI 协作的新审美。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        最符合 “Vibe Coding” 初衷。定义的是一种独特的技术审美与工作哲学，调性最高。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-5">Sinusoidal wave passing through a sleek floating portal,
+                        elegant lavender and matte black.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-5', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 6 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">进阶新人类</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">NEXT MAKER</span>
+                </div>
+                <p class="slogan">“定义 AI 时代的创造者身份。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        最具标签感。从“使用者”进化为“创造者”，充满向上的力量，强调身份认同。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-6">Minimalist profile of a human head with a glowing tech
+                        spark, futuristic gold and black.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-6', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 7 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">极简构筑派</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">BUILD MINIMAL</span>
+                </div>
+                <p class="slogan">“去虚火，直击商业本质。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        强调不割韭菜。主张“极简”且“硬核”的构建方式，在浮躁的市场中显得极为纯粹。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-7">A single black square with a precise white diagonal cut,
+                        Bauhaus style, intense contrast.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-7', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 8 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">心流创造</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">FLOW CRAFT</span>
+                </div>
+                <p class="slogan">“在专注中，遇见 AI 的无限可能。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        强调进入“心流”状态的创造过程。四字对仗工整，且具有极强的动感和品牌包容力。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-8">Dynamic fluid curves intertwining with a glowing pencil
+                        tip, holographic finish, smooth and airy.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-8', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 9 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">智速构筑</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">SYNC BUILD</span>
+                </div>
+                <p class="slogan">“同步未来，极速交付。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        突出 AI 带来的效率提升。“智”代表大脑，“速”代表结果，非常适合强调交付力的实战社群。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-9">A sleek lightning bolt slicing through a 3D glass cube,
+                        electric purple and cobalt, fast-paced aesthetic.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-9', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 10 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">代码脉动</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CODE PULSE</span>
+                </div>
+                <p class="slogan">“让每一行代码都拥有生命。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        赋予冰冷的代码以“生命力”。Pulse 呼应了 Monthly/Weekly 的节奏，但比它们更有人的温度。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-10">Heartbeat waveform integrated into a binary code matrix,
+                        glowing crimson and dark grey, high energy.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-10', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 11 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造灵机</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE SPARK</span>
+                </div>
+                <p class="slogan">“捕捉那一瞬的直觉火花。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        强调创意产生的瞬间感。AI 不是冷冰冰的计算，而是点燃你灵感的火石，非常适合轻量化实战。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-11">A glass bulb containing a vibrant electric spark, neon
+                        indigo background, minimalist line art.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-11', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 12 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造本能</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE INSTINCT</span>
+                </div>
+                <p class="slogan">“让 AI 成为你的第二直觉。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        强调技能内化。当 AI 协作变成一种“本能”时，创造力将不再受技术门槛的限制。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-12">An abstract brain silhouette made of flowing biological
+                        fibers and digital vines, organic and tech hybrid.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-12', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 13 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造引力</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE GRAVITY</span>
+                </div>
+                <p class="slogan">“吸引优秀的创造者在此交汇。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        强调社群的磁场。这里不仅教技术，更像一个引力场，吸引所有不甘平凡的 Creator。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-13">A stylized black hole with glowing rings of data
+                        particles, centered and balanced, cinematic dark mode.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-13', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 14 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造奇点</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE SINGULARITY</span>
+                </div>
+                <p class="slogan">“见证个人能力的指数爆发。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        致敬技术奇点。寓意在 AI 的加持下，每个个体都可以成为一个爆发能量的中心。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-14">A single intense point of light refracting into a
+                        spectrum of digital shards, ultra-high contrast, obsidian background.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-14', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 15 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造新流</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE FLOW</span>
+                </div>
+                <p class="slogan">“开启丝滑的 AI 协作时代。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        最直接的 Vibe 表达。中文“新流”既代表 Workflow，也代表这种全新的创作流派。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-15">Abstract fluid motion showing a transition from scattered
+                        blocks to a smooth stream, iridescent colors.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-15', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 16 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造原力</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE FORCE</span>
+                </div>
+                <p class="slogan">“唤醒每个人内心深处的构建原力。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        致敬经典，极具精神力量感。将 AI 视为一种赋能个体的力量，帮助使用者突破边界。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-16">A glowing energetic orb surrounded by swirling space
+                        dust, monochromatic black and white with high-tech cyan glow.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-16', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 17 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造势能</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE MOMENTUM</span>
+                </div>
+                <p class="slogan">“蓄力当下，引爆未来的创造动能。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        强调积累与爆发。非常适合社群定位，寓意大家一起在这里积蓄 AI 能力，形成无可阻挡的趋势。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-17">Heavy geometric blocks gaining upward velocity, streak
+                        lines behind them, vibrant sunset orange and deep violet.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-17', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 18 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造视野</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE HORIZON</span>
+                </div>
+                <p class="slogan">“看见 AI 时代更远的地平线。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        强调认知博大。跳出局部的工具使用，从宏观视角洞察 AI 如何重塑行业，具有极佳的行业厚度。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-18">A clean horizontal line splitting a futuristic sunrise,
+                        minimalist sun icon, matte silver and electric gold.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-18', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 19 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造回响</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE ECHO</span>
+                </div>
+                <p class="slogan">“让每一次交互都产生深远的回响。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        带有哲学意味。象征着人与 AI 之间的深度对话与反馈，体现了协作过程中的生命力和共鸣。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-19">Concentric ripples expanding across a liquid digital
+                        surface, translucent glass material, emerald green and dark abyss.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-19', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 20 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造光谱</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CREATE SPECTRUM</span>
+                </div>
+                <p class="slogan">“探索 AI 驱动的多彩创造光谱。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        寓意多样性。表达了 AI 能力可以覆盖多彩各行各业，是一个全能型的创作者集散地。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-20">A prism refracting a white laser beam into a colorful
+                        geometric digital spectrum, dark obsidian canvas.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-20', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 21 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造直觉</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">VIBE CODING</span>
+                </div>
+                <p class="slogan">“忘掉代码，全神贯注于你的直觉。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        致敬 Andrej Karpathy 提出的 Vibe Coding。将技术简化的极致描述，强调直觉驱动而非公式驱动。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-21">Ethereal nebula forming the shape of a code cursor,
+                        dreamy purple and soft pink, high-tech spirituality.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-21', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 22 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造代力</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">AGENTIC FORCE</span>
+                </div>
+                <p class="slogan">“驱动智能代理，实现自主创造。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        聚焦 2025 核心词 Agentic（代理化）。强调打造自主运行的系统，代表了最前沿的工作流趋势。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-22">Dozens of small glowing nodes collaborating to form a
+                        giant gear, intricate clockwork design, metallic teal.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-22', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 23 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造本源</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">CONSTITUTIONAL AI</span>
+                </div>
+                <p class="slogan">“建立有边界、有价值观的创造力。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        来自 Anthropic 的硬核术语 Constitutional。体现了社群对 AI 底层协议和价值观的深度探索。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-23">A glowing parchment icon integrated with a digital
+                        circuit board, parchment texture and indigo glow.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-23', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 24 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造回路</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">FEEDBACK LOOP</span>
+                </div>
+                <p class="slogan">“在不断的反馈中，逼近完美的创造。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        致敬 Vibe Coding 的核心：Prompt-Test-Refine。这是一个关于精准反馈与持续进化的闭环逻辑。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-24">Two circular arrows made of liquid mercury chasing each
+                        other, ultra-reflective, minimalist and modern.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-24', this)">COPY</button>
+                </div>
+            </div>
+
+            <!-- Option 25 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="cn-name">创造奇点</span>
+                    <span class="slash">/</span>
+                    <span class="en-name">SINGULARITY BUILD</span>
+                </div>
+                <p class="slogan">“见证个人能力的指数级爆发。”</p>
+                <div class="reason-box">
+                    <span class="reason-title">推荐理由</span>
+                    <p class="reason-content">
+                        致敬技术奇点。寓意在 2025 年，个人通过 AI 获得的构建能力将迎来非线性的爆发式增长。
+                    </p>
+                </div>
+                <div class="logo-prompt-box">
+                    <span class="logo-prompt-title">Logo 创意提示词</span>
+                    <p class="logo-prompt-text" id="prompt-25">A single intense point of light refracting into a
+                        spectrum of digital shards, ultra-high contrast, obsidian background.</p>
+                    <button class="copy-btn" onclick="copyText('prompt-25', this)">COPY</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Dolores AI Project. Compiled by Antigravity Agent.</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyText(id, btn) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = 'COPIED!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>
