@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./viewer.css" />
+  <script>
+    window.PAGE_CONFIG = {
+      badge: '对内版',
+      title: 'V3 对内 产品渠道分润作战图',
+      description: '给团队内部统一共识用。重点看我们真正想卖什么、价格红线在哪里、分润怎么挂钩渠道动作、第一轮和刘律要怎么推进。',
+      stageTitle: '团队内部脑图',
+      stageDescription: '左侧可以直接改 Markdown，脑图会自动刷新。注意：这里的修改默认只在你浏览器里预览，不会直接写回 GitHub。',
+      sourceLabel: '源文件：lawyer-v3/internal.md',
+      markdownPath: './internal.md',
+      downloadName: '0325-对内-产品渠道分润作战图-Markmap脑图-V3.md',
+      editUrl: 'https://github.com/DoloresSusu/dolo-pages/edit/main/lawyer-v3/internal.md',
+      documentTitle: '对内 产品渠道分润作战图 · GitHub Pages'
+    };
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-copy">
+          <span class="eyebrow"><span data-role="badge"></span></span>
+          <span class="eyebrow-sub"><a href="./">返回 V3 总入口</a></span>
+          <h1 class="page-title" data-role="title"></h1>
+          <p class="page-desc" data-role="description"></p>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-ghost" data-action="toggle-editor">编辑 Markdown</button>
+          <button class="btn" data-action="expand-all">全部展开</button>
+          <button class="btn" data-action="collapse-level-2">折叠到二级</button>
+          <button class="btn" data-action="fit-view">适配画布</button>
+          <a class="btn btn-accent btn-link" data-action="edit-github" target="_blank" rel="noreferrer">去 GitHub 正式修改</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="sidebar">
+        <section class="sidebar-card">
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Markdown 编辑区</h2>
+            <p class="sidebar-copy">适合会中快速试改结构、话术和节点顺序。确认后再点右上角按钮进入 GitHub 正式修改源文件。</p>
+          </div>
+          <div class="sidebar-actions">
+            <button class="btn" data-action="apply-editor">立即刷新</button>
+            <button class="btn" data-action="restore-source">恢复源文档</button>
+            <button class="btn" data-action="copy-markdown">复制 Markdown</button>
+            <button class="btn" data-action="download-markdown">下载 Markdown</button>
+          </div>
+          <div class="sidebar-main">
+            <textarea class="editor" data-role="editor" spellcheck="false"></textarea>
+            <div class="status-row">
+              <span class="status-chip" data-role="status-chip"><span data-role="status-text">正在加载…</span></span>
+              <span data-role="last-action">最近动作：初始化中</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="stage-wrap">
+        <div class="stage-card">
+          <div class="stage-meta">
+            <div class="stage-meta-copy">
+              <h2 data-role="stage-title"></h2>
+              <p data-role="stage-description"></p>
+            </div>
+            <div class="stage-badges">
+              <span class="badge" data-role="source-label"></span>
+              <span class="badge">Ctrl/Cmd + S：立即刷新</span>
+              <span class="badge">Esc：收起编辑区</span>
+            </div>
+          </div>
+          <div class="map-stage">
+            <svg id="mindmap"></svg>
+            <div class="empty-state">正在加载脑图…</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
