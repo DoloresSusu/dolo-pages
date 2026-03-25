@@ -122,7 +122,7 @@ function toggleEditor(forceOpen) {
 }
 
 async function loadSourceMarkdown() {
-  const response = await fetch(pageConfig.markdownPath, { cache: 'no-store' });
+  const response = await fetch(pageConfig.markdownUrl || pageConfig.markdownPath, { cache: 'no-store' });
   if (!response.ok) {
     throw new Error(`无法读取 Markdown: ${response.status}`);
   }
