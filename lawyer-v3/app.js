@@ -8,7 +8,7 @@ const DEFAULT_OPTIONS = {
   embedGlobalCSS: false,
   fitRatio: 0.9,
   initialExpandLevel: 2,
-  maxWidth: 340,
+  maxWidth: 0,
   paddingX: 18,
   scrollForPan: true,
   zoom: true,
@@ -74,7 +74,11 @@ async function parseMarkdown(markdown) {
   if (assets.styles?.length) loadCSS(assets.styles);
   if (assets.scripts?.length) await loadJS(assets.scripts);
   const frontmatterOptions = deriveOptions(result.frontmatter?.markmap);
-  state.renderOptions = { ...DEFAULT_OPTIONS, ...frontmatterOptions };
+  state.renderOptions = {
+    ...DEFAULT_OPTIONS,
+    ...frontmatterOptions,
+    maxWidth: 0,
+  };
   state.parsedRoot = result.root;
 }
 
